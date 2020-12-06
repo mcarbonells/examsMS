@@ -1,0 +1,323 @@
+swagger: "2.0"
+info:
+  description: "Esta es una descripción de las URL del laboratorio dos de la materia Arquitectura de software, desarrollado por los estudiantes: Nicolas Caro, Sebastian Castañeda y Andres Velandia"
+  version: "1.0.0"
+  title: "Laboratorio 2"
+  contact:
+    email: "anfvelandiaer@unal.edu.co"
+host: "ec2-3-235-253-199.compute-1.amazonaws.com"
+tags:
+  - name: "categories"
+    description: "Información de las categorias"
+    externalDocs:
+      description: "POSTMAN"
+      url: "https://documenter.getpostman.com/view/9041185/TVKBZeKC"
+  - name: "products"
+    description: "Información de los Productos"
+    externalDocs:
+      description: "POSTMAN"
+      url: "https://documenter.getpostman.com/view/9041185/TVKBZeKC"
+schemes:
+  - "http"
+
+paths:
+  /categories:
+    post:
+      tags:
+        - "categories"
+      summary: "Añadir una categoria"
+      description: ""
+      operationId: "addCategory"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Categoria a añadir en la DB con nombre y descripción"
+          required: true
+          schema:
+            $ref: "#/definitions/category"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/category"
+    get:
+      tags:
+        - "categories"
+      summary: "Obtener categorias"
+      description: ""
+      operationId: "getCatgories"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/category"
+
+  /categories/{categoryId}:
+    get:
+      tags:
+        - "categories"
+      summary: "Encontrar categoria por ID"
+      operationId: "getCategory"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "categoryId"
+          in: "path"
+          description: "ID of category to update"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/category"
+        "404":
+          description: "not found"
+
+    put:
+      tags:
+        - "categories"
+      summary: "Añadir una categoria"
+      description: ""
+      operationId: "putCategory"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "categoryId"
+          in: "path"
+          description: "ID of category to update"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "body"
+          name: "body"
+          description: "Categoria a actualizar en la DB con nombre y descripción"
+          required: true
+          schema:
+            $ref: "#/definitions/category"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/category"
+        "404":
+          description: "not found"
+
+    delete:
+      tags:
+        - "categories"
+      summary: "Eliminar categoria"
+      description: ""
+      operationId: "deletePet"
+      parameters:
+        - name: "categoryId"
+          in: "path"
+          description: "ID de categoria a eliminar"
+          required: true
+          type: "integer"
+          format: "int64"
+      produces:
+        - "application/xml"
+        - "application/json"
+
+      responses:
+        "404":
+          description: "not found"
+
+  /products:
+    post:
+      tags:
+        - "products"
+      summary: "Añadir una producto"
+      description: ""
+      operationId: "addProduct"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "producto a añadir en la DB"
+          required: true
+          schema:
+            $ref: "#/definitions/product"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/product"
+    get:
+      tags:
+        - "products"
+      summary: "Obtener Productos"
+      description: ""
+      operationId: "getProducts"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/product"
+
+  /products/{productId}:
+    get:
+      tags:
+        - "products"
+      summary: "Encontrar producto por ID"
+      operationId: "getProduct"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "ID de producto a consultar"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/product"
+        "404":
+          description: "not found"
+
+    put:
+      tags:
+        - "products"
+      summary: "Actualizar unproducto"
+      description: ""
+      operationId: "putProduct"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "ID de producto a actualizar"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "body"
+          name: "body"
+          description: "Producto a actualizar en la DB"
+          required: true
+          schema:
+            $ref: "#/definitions/product"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/product"
+        "404":
+          description: "not found"
+
+    delete:
+      tags:
+        - "products"
+      summary: "Eliminar producto"
+      description: ""
+      operationId: "deleteProduct"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "ID de producto a eliminar"
+          required: true
+          type: "integer"
+          format: "int64"
+      produces:
+        - "application/xml"
+        - "application/json"
+
+      responses:
+        "404":
+          description: "not found"
+
+
+
+definitions:
+  category:
+    type: "object"
+    required:
+      - "name"
+      - "description"
+    properties:
+      name:
+        type: "string"
+        example: "Categoria 1"
+      description:
+        type: "string"
+        example: "Descripción Categoria 1"
+    xml:
+      name: "Category"
+  product:
+    type: "object"
+    required:
+      - "name"
+      - "category"
+      - "description"
+      - "unit_measurement"
+      - "quantity"
+    properties:
+      category:
+        $ref: "#/definitions/category"
+      name:
+        type: "string"
+        example: "Water"
+      description:
+        type: "string"
+        example: "Water"
+      unit_measurement:
+        type: "string"
+        example: "LI"
+      quantity:
+        type: "integer"
+        example: "2"
+    xml:
+      name: "Product"

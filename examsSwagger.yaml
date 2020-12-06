@@ -1,0 +1,505 @@
+swagger: "2.0"
+info:
+  description: "Esta es una descripción de las URL del micro servicio Examenes del proyecto dentro de la materia Arquitectura de software, desarrollado por los estudiantes: miembros del grupo 1B"
+  version: "1.0.0"
+  title: "Proyecto Grupo 1B"
+  contact:
+    email: "mcarbonells@unal.edu.co"
+host: "localhost"
+tags:
+- name: "examLevel"
+  description: "Examenes de para poder pasar los niveles"
+  externalDocs:
+    description: "POSTMAN"
+    url: "https://documenter.getpostman.com/view/11064420/TVRj4nX2#472588fd-09e2-417d-b001-ec823e179c97"
+- name: "weekQuiz"
+  description: "Quices que se realizan cada semana"
+  externalDocs:
+    description: "POSTMAN"
+    url: "https://documenter.getpostman.com/view/11064420/TVRj4nX2#472588fd-09e2-417d-b001-ec823e179c97"
+- name: "userQuiz"
+  description: "Quices que han realizado los usuarios"
+  externalDocs:
+    description: "POSTMAN"
+    url: "https://documenter.getpostman.com/view/11064420/TVRj4nX2#472588fd-09e2-417d-b001-ec823e179c97"
+schemes:
+- "http"
+
+paths:
+  /examLevel/newExamLevel:
+    post:
+      tags:
+      - "examLevel"
+      summary: "Añadir un nuevo examen"
+      description: ""
+      operationId: "addExamLevel"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Examen de nivel a añadir en la DB pidiendo userId, level y words"
+        required: true
+        schema:
+          $ref: "#/definitions/examLevel"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/examLevel"
+              
+  /examLevel/AllExams:   
+    get:
+      tags:
+      - "examLevel"
+      summary: "Obtener todos los examenes"
+      description: ""
+      operationId: "findAll"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/examLevel"
+        "204":
+          description: "unsuccessful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/examLevel"
+  /examLevel/userExamLevel:
+      get:
+        tags:
+          - "examLevel"
+        summary: "Encontrar un examen por el usuario"
+        operationId: "fingByIdE"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Busacar en DB un examen pidiendo userId"
+            required: true
+            schema:
+              $ref: "#/definitions/examLevel"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/examLevel"
+          "204":
+            description: "not found"
+              
+  /examLevel/completeExamLevel:
+    put:
+      tags:
+      - "examLevel"
+      summary: "Modificar un examen ya guardado"
+      description: ""
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Examen que se actualiza en la DB con userId y level"
+        required: true
+        schema:
+          $ref: "#/definitions/examLevel"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/examLevel"
+        "404":
+          description: "not found"
+  
+  /examLevel/deleteExam: 
+    delete:
+      tags:
+      - "examLevel"
+      summary: "Eliminar examen"
+      description: ""
+      operationId: "deleteExam"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Examen que se elimina en la DB con userId y level"
+          required: true
+          schema:
+            $ref: "#/definitions/examLevel"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/examLevel"
+        "404":
+          description: "not found"
+          
+  /userQuiz/newQuiz:
+    post:
+      tags:
+        - "userQuiz"
+      summary: "Añadir un nuevo quiz por usuario"
+      description: ""
+      operationId: "addUserQuiz"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Quiz por usuarioa añadir en la DB pidiendo userId, IDquiz, words, correctWords, score"
+          required: true
+          schema:
+            $ref: "#/definitions/userQuiz"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/userQuiz"
+
+  /userQuiz/userQuizes:
+      get:
+        tags:
+          - "userQuiz"
+        summary: "Obtener todos los quices de los usuarios"
+        description: ""
+        operationId: "findAllUQ"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/userQuiz"
+          "204":
+            description: "unsuccessful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/userQuiz"
+
+  /userQuiz/usersQuizes:
+      get:
+        tags:
+          - "userQuiz"
+        summary: "Encontrar un quiz por el id del quiz"
+        operationId: "fingByIdQuiz"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Busacar en DB un quiz pidiendo idQuiz"
+            required: true
+            schema:
+              $ref: "#/definitions/userQuiz"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/userQuiz"
+          "204":
+            description: "not found"
+            
+  /userQuiz/quizOfUser:
+        get:
+          tags:
+            - "userQuiz"
+          summary: "Encontrar un quiz por el id del usuario"
+          operationId: "fingByIdQuizUQ"
+          produces:
+            - "application/json"
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "Busacar en DB un quiz pidiendo userId"
+              required: true
+              schema:
+                $ref: "#/definitions/userQuiz"
+          responses:
+            "200":
+              description: "successful operation"
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/definitions/userQuiz"
+            "204":
+              description: "not found"
+              
+  /userQuiz/deleteUserQuiz:
+      delete:
+        tags:
+          - "userQuiz"
+        summary: "Eliminar quiz de usuario"
+        description: ""
+        operationId: "deleteQuiz"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Quiz que se elimina en la DB segun userID y idQuiz"
+            required: true
+            schema:
+              $ref: "#/definitions/userQuiz"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/userQuiz"
+          "404":
+            description: "not found"
+
+  /weekQuiz/newQuiz:
+    post:
+      tags:
+        - "weekQuiz"
+      summary: "Añadir un nuevo quiz"
+      description: ""
+      operationId: "addWeekQuiz"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Quiz a añadir en la DB pidiendo active y words"
+          required: true
+          schema:
+            $ref: "#/definitions/weekQuiz"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/weekQuiz"
+
+  /weekQuiz/Quizes:
+    get:
+      tags:
+        - "examLevel"
+      summary: "Obtener todos los quices"
+      description: ""
+      operationId: "findAllEL"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/weekQuiz"
+        "204":
+          description: "unsuccessful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/weekQuiz"
+
+  /weekQuiz/thisWeekQuiz:
+    get:
+      tags:
+        - "weekQuiz"
+      summary: "Encontrar un quiz por si esta activado o no"
+      operationId: "fingById"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Busacar en DB un quiz pidiendo active"
+          required: true
+          schema:
+            $ref: "#/definitions/weekQuiz"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/weekQuiz"
+        "204":
+          description: "not found"
+          
+  /weekQuiz/deactivateQuiz:  
+    put:
+        tags:
+          - "weekQuiz"
+        summary: "Desactivar un quiz"
+        description: ""
+        operationId: "updateWQ"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Quiz a modificar en la DB, pasa de activo a inactivo"
+            required: true
+            schema:
+              $ref: "#/definitions/weekQuiz"
+        responses:
+          "201":
+            description: "successful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/weekQuiz"
+  /weekQuiz/deleteQuiz:
+      delete:
+        tags:
+          - "weekQuiz"
+        summary: "Eliminar quiz"
+        description: ""
+        operationId: "deleteWeek"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Quiz que se elimina en la DB active"
+            required: true
+            schema:
+              $ref: "#/definitions/weekQuiz"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/weekQuiz"
+          "404":
+            description: "not found"
+    
+definitions:
+  examLevel:
+    type: "object"
+    required:
+    - "userId"
+    - "level"
+    - "words"
+    - "date"
+    - "correctWords"
+    - "pass"
+    properties:
+      userId:
+        type: "integer"
+        example: "1"
+      level:
+        type: "string"
+        example: "A1"
+      words:
+        items: 
+          type: "array"
+        example: ["dog","apple","take off","to cry","lung"]
+      date:
+        type: "string"
+        example: "2020-10-07T23:07:00.543+00:00"
+      correctwords:
+        items:
+          type: "array"
+        example: ["dog","apple","take off"]
+      pass:
+        type: "boolean"
+        example: "true"
+    xml:
+      name: "examLevel"
+  weekQuiz:
+    type: "object"
+    required:
+    - "idQuiz"
+    - "words"
+    - "date"
+    - "active"
+    properties:
+      idQuiz:
+        type: "integer"
+        example: "1"
+      words:
+        items:
+          type: "array"
+        example: ["dog","apple","take off","to cry","lung"]
+      date:
+          type: "string"
+          example: "2020-10-07T23:07:00.543+00:00"
+      active:
+          type: "boolean"
+          example: "true"
+    xml:
+      name: "weekQuiz"
+  userQuiz:
+    type: "object"
+    required:
+      - "userId"
+      - "idQuiz"
+      - "words"
+      - "date"
+      - "correctwords"
+      - "score"
+    properties:
+      userId:
+        type: "integer"
+        example: "1"
+      idQuiz:
+        type: "integer"
+        example: "1"
+      words:
+        items:
+          type: "array"
+        example: ["dog","apple","take off","to cry","lung"]
+      date:
+          type: "string"
+          example: "2020-10-07T23:07:00.543+00:00"
+      correctwords:
+          items:
+            type: "array"
+          example: ["dog","apple","take off"]
+      active:
+          type: "boolean"
+          example: "true"
+    xml:
+      name: "weekQuiz"
