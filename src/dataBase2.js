@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://3.238.233.96:27018/examsDB',{
+mongoose.connect('mongodb://3.239.124.145:27018/examsDB',{
     userNewUrlParser: true,
     userCreateIndex: true
 });
@@ -11,5 +11,3 @@ connection.once('open',() => {
 });
 
 module.exports = mongoose;
-
-
