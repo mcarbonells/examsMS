@@ -1,7 +1,6 @@
 const express = require('express');
 
 require('./dataBase');
-require('./dataBase2');
 
 const methodOverride = require('method-override');
 const cors = require('cors');

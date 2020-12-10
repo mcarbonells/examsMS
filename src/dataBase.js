@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://3.238.233.96:27018/examsDB',{
+mongoose.connect('mongodb://mongoe.mongoe.172.31.65.76.xip.io/examsDB',{
     userNewUrlParser: true,
     userCreateIndex: true
 });
