@@ -1,15 +1,26 @@
-const mongoose = require('mongoose');
+const mongoose1 = require('mongoose');
+const mongoose2 = require('mongoose');
 
-mongoose.connect('mongodb://52.72.81.222:27018/examsDB',{
+mongoose1.connect('mongodb://3.238.233.96:27018/examsDB',{
     userNewUrlParser: true,
     userCreateIndex: true
 });
-const connection= mongoose.connection;
+const connection= mongoose1.connection;
 
 connection.once('open',() => {
-    console.log("DB is connected");
+    console.log("DB 1 is connected");
 });
 
-module.exports = mongoose;
+mongoose2.connect('mongodb://3.239.124.145:27018/examsDB',{
+    userNewUrlParser: true,
+    userCreateIndex: true
+});
+const connection2= mongoose2.connection;
+
+connection2.once('open',() => {
+    console.log("DB 2 is connected");
+});
+
+module.exports ={mongoose1, mongoose2};
 
 
