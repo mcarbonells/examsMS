@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://3.238.233.96:27018/examsDB',{
+mongoose.connect('mongodb+srv://mafe:mafe123@vocabularydb.hfggs.mongodb.net/examsDB?retryWrites=true&w=majority',{
     userNewUrlParser: true,
     userCreateIndex: true
 });
